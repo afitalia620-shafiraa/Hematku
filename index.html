@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HematKu – Catat Uangmu</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- TOAST FLOATING NOTIFICATION -->
+<div id="toast-box"></div>
+
+<!-- ═══════════════════════════════
+     HALAMAN: LOGIN
+════════════════════════════════ -->
+<div class="page active" id="page-login">
+  <div class="login-wrap">
+    <div class="login-brand">
+      <span class="brand-icon">💰</span>
+      <h1>HematKu</h1>
+      <p>Catat pengeluaranmu, kendalikan hidupmu</p>
+    </div>
+    <div class="card login-card">
+      <h2>Masuk</h2>
+      <p class="card-sub">Selamat datang kembali!</p>
+      <div class="form-group">
+        <label for="li-email">Email</label>
+        <input type="email" id="li-email" placeholder="email@siswa.sch.id" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="li-pass">Password</label>
+        <div class="pass-wrap">
+          <input type="password" id="li-pass" placeholder="Masukkan password" autocomplete="current-password" />
+          <button class="btn-eye" type="button" onclick="togglePass('li-pass', this)">👁️</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" type="button" onclick="doLogin()">Masuk</button>
+      <p class="form-switch">Belum punya akun? <a onclick="goto('page-register')">Daftar sekarang</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     HALAMAN: REGISTER
+════════════════════════════════ -->
+<div class="page" id="page-register">
+  <div class="login-wrap">
+    <div class="login-brand">
+      <span class="brand-icon">💰</span>
+      <h1>HematKu</h1>
+      <p>Mulai perjalanan hemat kamu hari ini</p>
+    </div>
+    <div class="card login-card">
+      <h2>Daftar Akun</h2>
+      <p class="card-sub">Buat akun gratis sekarang</p>
+      <div class="form-group">
+        <label for="rg-name">Nama Lengkap</label>
+        <input type="text" id="rg-name" placeholder="Nama kamu" autocomplete="name" />
+      </div>
+      <div class="form-group">
+        <label for="rg-email">Email</label>
+        <input type="email" id="rg-email" placeholder="email@siswa.sch.id" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="rg-pass">Password</label>
+        <div class="pass-wrap">
+          <input type="password" id="rg-pass" placeholder="Minimal 6 karakter" autocomplete="new-password" />
+          <button class="btn-eye" type="button" onclick="togglePass('rg-pass', this)">👁️</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" type="button" onclick="doRegister()">Buat Akun</button>
+      <p class="form-switch">Sudah punya akun? <a onclick="goto('page-login')">Masuk</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     HALAMAN: DASHBOARD
+════════════════════════════════ -->
+<div class="page" id="page-dashboard">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo-sm">💰 HematKu</span>
+      <span id="greeting" class="greeting"></span>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-icon" type="button" onclick="toggleDark()" id="dark-btn" title="Mode Gelap">🌙</button>
+      <button class="btn-icon" type="button" onclick="doLogout()" title="Keluar">🚪</button>
+    </div>
+  </header>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" type="button" data-tab="t-beranda" onclick="switchTab(this)">🏠 Beranda</button>
+    <button class="tab-btn" type="button" data-tab="t-catat" onclick="switchTab(this)">➕ Catat</button>
+    <button class="tab-btn" type="button" data-tab="t-riwayat" onclick="switchTab(this)">📋 Riwayat</button>
+    <button class="tab-btn" type="button" data-tab="t-setting" onclick="switchTab(this)">⚙️ Pengaturan</button>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- TAB: BERANDA -->
+    <div class="tab-panel active" id="t-beranda">
+      <div class="summary-grid">
+        <div class="sum-card card-blue">
+          <span class="sum-label">Total Hari Ini</span>
+          <span class="sum-amt" id="s-hari">Rp 0</span>
+        </div>
+        <div class="sum-card card-green">
+          <span class="sum-label">Total Bulan Ini</span>
+          <span class="sum-amt" id="s-bulan">Rp 0</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="budget-header">
+          <span class="budget-title">📊 Batas Pengeluaran Bulan Ini</span>
+          <span id="b-pct" class="budget-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="b-fill"></div>
+        </div>
+        <div class="budget-info">
+          <span id="b-used">Terpakai: Rp 0</span>
+          <span id="b-lim">Batas: Rp 300.000</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title">📈 Pengeluaran per Kategori</h3>
+        <div id="kat-bars"></div>
+      </div>
+
+      <div class="card tips-card">
+        <h3 class="section-title">💡 Tips Hemat</h3>
+        <p class="tips-text" id="tips-txt"></p>
+        <button class="btn btn-outline btn-sm" type="button" onclick="nextTips()">Tips Lain ↻</button>
+      </div>
+
+      <div class="card">
+        <div class="section-hd">
+          <h3 class="section-title">🕐 Transaksi Terbaru</h3>
+          <button class="btn-link" type="button" onclick="goTab('t-riwayat')">Lihat Semua →</button>
+        </div>
+        <div id="recent-list"></div>
+      </div>
+    </div>
+
+    <!-- TAB: CATAT -->
+    <div class="tab-panel" id="t-catat">
+      <div class="card">
+        <h2 class="tab-heading">➕ Catat Pengeluaran</h2>
+        <p class="card-sub">Catat setiap pengeluaran agar kamu lebih sadar!</p>
+        <div class="form-group">
+          <label for="i-tgl">Tanggal</label>
+          <input type="date" id="i-tgl" />
+        </div>
+        <div class="form-group">
+          <label for="i-jml">Jumlah (Rp)</label>
+          <input type="number" id="i-jml" placeholder="Contoh: 15000" min="0" />
+        </div>
+        <div class="form-group">
+          <label>Kategori</label>
+          <div class="kat-pills">
+            <button class="pill active" type="button" data-kat="Makan" onclick="pilihKat(this)">🍛 Makan</button>
+            <button class="pill" type="button" data-kat="Transport" onclick="pilihKat(this)">🚌 Transport</button>
+            <button class="pill" type="button" data-kat="Jajan" onclick="pilihKat(this)">🍭 Jajan</button>
+            <button class="pill" type="button" data-kat="Belajar" onclick="pilihKat(this)">📚 Belajar</button>
+            <button class="pill" type="button" data-kat="Lainnya" onclick="pilihKat(this)">📦 Lainnya</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="i-note">Catatan (opsional)</label>
+          <input type="text" id="i-note" placeholder="Misal: makan siang di kantin" />
+        </div>
+        <button class="btn btn-primary btn-full" type="button" onclick="simpan()">💾 Simpan Pengeluaran</button>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title">📊 Statistik Cepat</h3>
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-num" id="st-total">0</span>
+            <span class="stat-lbl">Total Transaksi</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="st-max">Rp 0</span>
+            <span class="stat-lbl">Terbesar</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="st-min">Rp 0</span>
+            <span class="stat-lbl">Terkecil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: RIWAYAT -->
+    <div class="tab-panel" id="t-riwayat">
+      <div class="card">
+        <div class="section-hd">
+          <h2 class="tab-heading">📋 Riwayat</h2>
+          <button class="btn btn-dout btn-sm" type="button" onclick="hapusSemua()">🗑 Hapus Semua</button>
+        </div>
+        <div class="filter-row">
+          <select id="f-kat" onchange="renderRiwayat()">
+            <option value="">Semua Kategori</option>
+            <option value="Makan">🍛 Makan</option>
+            <option value="Transport">🚌 Transport</option>
+            <option value="Jajan">🍭 Jajan</option>
+            <option value="Belajar">📚 Belajar</option>
+            <option value="Lainnya">📦 Lainnya</option>
+          </select>
+          <select id="f-sort" onchange="renderRiwayat()">
+            <option value="baru">Terbaru</option>
+            <option value="lama">Terlama</option>
+            <option value="besar">Terbesar</option>
+          </select>
+        </div>
+        <div id="riwayat-list"></div>
+      </div>
+    </div>
+
+    <!-- TAB: PENGATURAN -->
+    <div class="tab-panel" id="t-setting">
+      <div class="card">
+        <h2 class="tab-heading">⚙️ Pengaturan</h2>
+
+        <div class="settings-sec">
+          <h3 class="section-title">💰 Batas Pengeluaran Bulanan</h3>
+          <div class="form-group">
+            <label for="i-batas">Batas Maksimal (Rp)</label>
+            <input type="number" id="i-batas" placeholder="Contoh: 300000" min="0" />
+          </div>
+          <button class="btn btn-primary" type="button" onclick="simpanBatas()">Simpan Batas</button>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="settings-sec">
+          <h3 class="section-title">🌙 Tampilan</h3>
+          <div class="toggle-row">
+            <span>Mode Gelap</span>
+            <label class="switch">
+              <input type="checkbox" id="dark-check" onchange="toggleDark()" />
+              <span class="slider-t"></span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="settings-sec">
+          <h3 class="section-title">👤 Akun</h3>
+          <p class="profile-info" id="profile-info"></p>
+          <button class="btn btn-danger" type="button" onclick="doLogout()">Keluar dari Akun</button>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="settings-sec">
+          <h3 class="section-title">📖 Tentang HematKu</h3>
+          <p class="about-txt">HematKu adalah aplikasi monitoring keuangan untuk pelajar. Catat pengeluaran setiap hari agar tidak kaget uang habis!</p>
+          <p class="about-txt version">Versi 1.0.0 &nbsp;•&nbsp; Untuk pelajar Indonesia 🇮🇩</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
