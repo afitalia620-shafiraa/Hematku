@@ -82,7 +82,7 @@ function doLogin() {
 
   user = found;
   localStorage.setItem('hku_user', JSON.stringify(user));
-  toast('Yeay! 🎉', 'Selamat datang, ' + user.name + '!', 'success');
+  toast('Yeay!', 'Selamat datang, ' + user.name + '!', 'success');
   initApp();
 }
 
