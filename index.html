@@ -4,29 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HematKu – Catat Uangmu</title>
-  <link rel="stylesheet" href="Style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- TOAST FLOATING NOTIFICATION -->
+<!-- ██ FLOATING TOAST ██ -->
 <div id="toast-box"></div>
 
-<!-- ═══════════════════════════════
+<!-- ████████████████████████
      HALAMAN: LOGIN
-════════════════════════════════ -->
+████████████████████████ -->
 <div class="page active" id="page-login">
   <div class="login-wrap">
-    <div class="login-brand">
-      <span class="brand-icon">💰</span>
-      <h1>HematKu</h1>
-      <p>Catat pengeluaranmu, kendalikan hidupmu</p>
+
+    <!-- Hero Panel Kiri -->
+    <div class="login-hero">
+      <span class="hero-emoji">💰</span>
+      <h1 class="hero-title">HematKu</h1>
+      <p class="hero-sub">Aplikasi catat keuangan buat pelajar yang mau hidup lebih hemat dan cerdas!</p>
+      <div class="hero-badges">
+        <span class="hero-badge">✅ Gratis</span>
+        <span class="hero-badge">📱 Responsive</span>
+        <span class="hero-badge">🌙 Dark Mode</span>
+        <span class="hero-badge">🔔 Notifikasi</span>
+      </div>
     </div>
-    <div class="card login-card">
-      <h2>Masuk</h2>
-      <p class="card-sub">Selamat datang kembali!</p>
+
+    <!-- Form Panel Kanan -->
+    <div class="login-form-panel">
+      <h2>Masuk 👋</h2>
+      <p class="card-sub">Selamat datang kembali, yuk cek keuanganmu!</p>
+
       <div class="form-group">
         <label for="li-email">Email</label>
         <input type="email" id="li-email" placeholder="email@siswa.sch.id" autocomplete="email" />
@@ -38,25 +46,38 @@
           <button class="btn-eye" type="button" onclick="togglePass('li-pass', this)">👁️</button>
         </div>
       </div>
-      <button class="btn btn-primary btn-full" type="button" onclick="doLogin()">Masuk</button>
-      <p class="form-switch">Belum punya akun? <a onclick="goto('page-register')">Daftar sekarang</a></p>
+
+      <button class="btn btn-primary btn-full" type="button" onclick="doLogin()">🚀 Masuk Sekarang</button>
+      <p class="form-switch">Belum punya akun? <a onclick="goto('page-register')">Daftar gratis →</a></p>
     </div>
+
   </div>
 </div>
 
-<!-- ═══════════════════════════════
+<!-- ████████████████████████
      HALAMAN: REGISTER
-════════════════════════════════ -->
+████████████████████████ -->
 <div class="page" id="page-register">
   <div class="login-wrap">
-    <div class="login-brand">
-      <span class="brand-icon">💰</span>
-      <h1>HematKu</h1>
-      <p>Mulai perjalanan hemat kamu hari ini</p>
+
+    <!-- Hero Panel Kiri -->
+    <div class="login-hero">
+      <span class="hero-emoji">🌟</span>
+      <h1 class="hero-title">Mulai Hemat Sekarang!</h1>
+      <p class="hero-sub">Daftar gratis dan mulai kendalikan pengeluaranmu hari ini juga.</p>
+      <div class="hero-badges">
+        <span class="hero-badge">🍛 Makan</span>
+        <span class="hero-badge">🚌 Transport</span>
+        <span class="hero-badge">🍭 Jajan</span>
+        <span class="hero-badge">📚 Belajar</span>
+      </div>
     </div>
-    <div class="card login-card">
-      <h2>Daftar Akun</h2>
-      <p class="card-sub">Buat akun gratis sekarang</p>
+
+    <!-- Form Panel Kanan -->
+    <div class="login-form-panel">
+      <h2>Daftar Akun ✨</h2>
+      <p class="card-sub">Buat akun gratis dan mulai perjalanan hematmu!</p>
+
       <div class="form-group">
         <label for="rg-name">Nama Lengkap</label>
         <input type="text" id="rg-name" placeholder="Nama kamu" autocomplete="name" />
@@ -72,17 +93,20 @@
           <button class="btn-eye" type="button" onclick="togglePass('rg-pass', this)">👁️</button>
         </div>
       </div>
-      <button class="btn btn-primary btn-full" type="button" onclick="doRegister()">Buat Akun</button>
-      <p class="form-switch">Sudah punya akun? <a onclick="goto('page-login')">Masuk</a></p>
+
+      <button class="btn btn-primary btn-full" type="button" onclick="doRegister()">🎉 Buat Akun Gratis</button>
+      <p class="form-switch">Sudah punya akun? <a onclick="goto('page-login')">Masuk →</a></p>
     </div>
+
   </div>
 </div>
 
-<!-- ═══════════════════════════════
+<!-- ████████████████████████
      HALAMAN: DASHBOARD
-════════════════════════════════ -->
+████████████████████████ -->
 <div class="page" id="page-dashboard">
 
+  <!-- Top Bar -->
   <header class="topbar">
     <div class="topbar-left">
       <span class="logo-sm">💰 HematKu</span>
@@ -94,6 +118,7 @@
     </div>
   </header>
 
+  <!-- Tab Navigation -->
   <nav class="tab-nav">
     <button class="tab-btn active" type="button" data-tab="t-beranda" onclick="switchTab(this)">🏠 Beranda</button>
     <button class="tab-btn" type="button" data-tab="t-catat" onclick="switchTab(this)">➕ Catat</button>
@@ -103,22 +128,33 @@
 
   <main class="main-content">
 
-    <!-- TAB: BERANDA -->
+    <!-- ══════════════════════ TAB: BERANDA ══════════════════════ -->
     <div class="tab-panel active" id="t-beranda">
+
+      <!-- 4 Summary Cards -->
       <div class="summary-grid">
-        <div class="sum-card card-blue">
-          <span class="sum-label">Total Hari Ini</span>
+        <div class="sum-card card-violet" data-emoji="💸">
+          <span class="sum-label">Hari Ini</span>
           <span class="sum-amt" id="s-hari">Rp 0</span>
         </div>
-        <div class="sum-card card-green">
-          <span class="sum-label">Total Bulan Ini</span>
+        <div class="sum-card card-pink" data-emoji="📅">
+          <span class="sum-label">Bulan Ini</span>
           <span class="sum-amt" id="s-bulan">Rp 0</span>
+        </div>
+        <div class="sum-card card-teal" data-emoji="💾">
+          <span class="sum-label">Sisa Batas</span>
+          <span class="sum-amt" id="s-sisa">Rp 0</span>
+        </div>
+        <div class="sum-card card-orange" data-emoji="📊">
+          <span class="sum-label">Transaksi</span>
+          <span class="sum-amt" id="s-trx">0</span>
         </div>
       </div>
 
+      <!-- Budget Progress -->
       <div class="card">
         <div class="budget-header">
-          <span class="budget-title">📊 Batas Pengeluaran Bulan Ini</span>
+          <span class="budget-title">📊 Progress Batas Bulan Ini</span>
           <span id="b-pct" class="budget-pct">0%</span>
         </div>
         <div class="progress-bar">
@@ -130,17 +166,20 @@
         </div>
       </div>
 
+      <!-- Kategori Chart -->
       <div class="card">
-        <h3 class="section-title">📈 Pengeluaran per Kategori</h3>
+        <h3 class="section-title">📈 Rincian per Kategori</h3>
         <div id="kat-bars"></div>
       </div>
 
+      <!-- Tips Hemat -->
       <div class="card tips-card">
-        <h3 class="section-title">💡 Tips Hemat</h3>
+        <h3 class="section-title">💡 Tips Hemat Hari Ini</h3>
         <p class="tips-text" id="tips-txt"></p>
-        <button class="btn btn-outline btn-sm" type="button" onclick="nextTips()">Tips Lain ↻</button>
+        <button class="btn btn-outline btn-sm" type="button" onclick="nextTips()">🔄 Tips Lain</button>
       </div>
 
+      <!-- Transaksi Terbaru -->
       <div class="card">
         <div class="section-hd">
           <h3 class="section-title">🕐 Transaksi Terbaru</h3>
@@ -148,23 +187,26 @@
         </div>
         <div id="recent-list"></div>
       </div>
+
     </div>
 
-    <!-- TAB: CATAT -->
+    <!-- ══════════════════════ TAB: CATAT ══════════════════════ -->
     <div class="tab-panel" id="t-catat">
+
       <div class="card">
         <h2 class="tab-heading">➕ Catat Pengeluaran</h2>
-        <p class="card-sub">Catat setiap pengeluaran agar kamu lebih sadar!</p>
+        <p class="card-sub">Satu catatan kecil = satu langkah besar menuju hemat! 💪</p>
+
         <div class="form-group">
-          <label for="i-tgl">Tanggal</label>
+          <label for="i-tgl">📅 Tanggal</label>
           <input type="date" id="i-tgl" />
         </div>
         <div class="form-group">
-          <label for="i-jml">Jumlah (Rp)</label>
+          <label for="i-jml">💵 Jumlah (Rp)</label>
           <input type="number" id="i-jml" placeholder="Contoh: 15000" min="0" />
         </div>
         <div class="form-group">
-          <label>Kategori</label>
+          <label>🏷️ Kategori</label>
           <div class="kat-pills">
             <button class="pill active" type="button" data-kat="Makan" onclick="pilihKat(this)">🍛 Makan</button>
             <button class="pill" type="button" data-kat="Transport" onclick="pilihKat(this)">🚌 Transport</button>
@@ -174,18 +216,20 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="i-note">Catatan (opsional)</label>
+          <label for="i-note">📝 Catatan (opsional)</label>
           <input type="text" id="i-note" placeholder="Misal: makan siang di kantin" />
         </div>
+
         <button class="btn btn-primary btn-full" type="button" onclick="simpan()">💾 Simpan Pengeluaran</button>
       </div>
 
+      <!-- Statistik Cepat -->
       <div class="card">
-        <h3 class="section-title">📊 Statistik Cepat</h3>
+        <h3 class="section-title">⚡ Statistik Cepat</h3>
         <div class="stat-row">
           <div class="stat-item">
             <span class="stat-num" id="st-total">0</span>
-            <span class="stat-lbl">Total Transaksi</span>
+            <span class="stat-lbl">Transaksi</span>
           </div>
           <div class="stat-item">
             <span class="stat-num" id="st-max">Rp 0</span>
@@ -197,18 +241,21 @@
           </div>
         </div>
       </div>
+
     </div>
 
-    <!-- TAB: RIWAYAT -->
+    <!-- ══════════════════════ TAB: RIWAYAT ══════════════════════ -->
     <div class="tab-panel" id="t-riwayat">
+
       <div class="card">
         <div class="section-hd">
           <h2 class="tab-heading">📋 Riwayat</h2>
           <button class="btn btn-dout btn-sm" type="button" onclick="hapusSemua()">🗑 Hapus Semua</button>
         </div>
+
         <div class="filter-row">
           <select id="f-kat" onchange="renderRiwayat()">
-            <option value="">Semua Kategori</option>
+            <option value="">🏷️ Semua Kategori</option>
             <option value="Makan">🍛 Makan</option>
             <option value="Transport">🚌 Transport</option>
             <option value="Jajan">🍭 Jajan</option>
@@ -216,31 +263,36 @@
             <option value="Lainnya">📦 Lainnya</option>
           </select>
           <select id="f-sort" onchange="renderRiwayat()">
-            <option value="baru">Terbaru</option>
-            <option value="lama">Terlama</option>
-            <option value="besar">Terbesar</option>
+            <option value="baru">🕐 Terbaru</option>
+            <option value="lama">🕰️ Terlama</option>
+            <option value="besar">💰 Terbesar</option>
           </select>
         </div>
+
         <div id="riwayat-list"></div>
       </div>
+
     </div>
 
-    <!-- TAB: PENGATURAN -->
+    <!-- ══════════════════════ TAB: PENGATURAN ══════════════════════ -->
     <div class="tab-panel" id="t-setting">
+
       <div class="card">
         <h2 class="tab-heading">⚙️ Pengaturan</h2>
 
+        <!-- Batas -->
         <div class="settings-sec">
           <h3 class="section-title">💰 Batas Pengeluaran Bulanan</h3>
           <div class="form-group">
             <label for="i-batas">Batas Maksimal (Rp)</label>
             <input type="number" id="i-batas" placeholder="Contoh: 300000" min="0" />
           </div>
-          <button class="btn btn-primary" type="button" onclick="simpanBatas()">Simpan Batas</button>
+          <button class="btn btn-primary" type="button" onclick="simpanBatas()">💾 Simpan Batas</button>
         </div>
 
         <hr class="divider" />
 
+        <!-- Dark Mode -->
         <div class="settings-sec">
           <h3 class="section-title">🌙 Tampilan</h3>
           <div class="toggle-row">
@@ -254,19 +306,22 @@
 
         <hr class="divider" />
 
+        <!-- Profil -->
         <div class="settings-sec">
-          <h3 class="section-title">👤 Akun</h3>
+          <h3 class="section-title">👤 Akun Saya</h3>
           <p class="profile-info" id="profile-info"></p>
-          <button class="btn btn-danger" type="button" onclick="doLogout()">Keluar dari Akun</button>
+          <button class="btn btn-danger" type="button" onclick="doLogout()">🚪 Keluar dari Akun</button>
         </div>
 
         <hr class="divider" />
 
+        <!-- Tentang -->
         <div class="settings-sec">
           <h3 class="section-title">📖 Tentang HematKu</h3>
           <p class="about-txt">HematKu adalah aplikasi monitoring keuangan untuk pelajar. Catat pengeluaran setiap hari agar tidak kaget uang habis!</p>
           <p class="about-txt version">Versi 1.0.0 &nbsp;•&nbsp; Untuk pelajar Indonesia 🇮🇩</p>
         </div>
+
       </div>
     </div>
 
