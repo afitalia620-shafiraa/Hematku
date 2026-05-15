@@ -104,7 +104,7 @@ function doRegister() {
   localStorage.setItem('hku_users', JSON.stringify(users));
   user = u;
   localStorage.setItem('hku_user', JSON.stringify(u));
-  toast('Akun Dibuat! 🎊', 'Halo ' + name + ', selamat bergabung!', 'success');
+  toast('Akun Dibuat! ', 'Halo ' + name + ', selamat bergabung!', 'success');
   initApp();
 }
 
@@ -114,14 +114,14 @@ function doLogout() {
   goto('page-login');
   document.getElementById('li-email').value = '';
   document.getElementById('li-pass').value  = '';
-  toast('Sampai Jumpa! 👋', 'Kamu berhasil keluar.', 'info');
+  toast('Sampai Jumpa! ', 'Kamu berhasil keluar.', 'info');
 }
 
 /* ── INIT DASHBOARD ── */
 function initApp() {
   goto('page-dashboard');
   var h     = new Date().getHours();
-  var salam = h < 11 ? '🌅 Selamat pagi' : h < 15 ? '☀️ Selamat siang' : h < 18 ? '🌤️ Selamat sore' : '🌙 Selamat malam';
+  var salam = h < 11 ? 'Selamat pagi' : h < 15 ? 'Selamat siang' : h < 18 ? 'Selamat sore' : 'Selamat malam';
   document.getElementById('greeting').textContent = salam + ', ' + user.name.split(' ')[0] + '!';
   var tgl = new Date(user.at).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
   document.getElementById('profile-info').textContent = '📧 ' + user.email + ' • Bergabung ' + tgl;
@@ -156,7 +156,7 @@ function simpan() {
   saveData(data);
   document.getElementById('i-jml').value  = '';
   document.getElementById('i-note').value = '';
-  toast('Tersimpan! ✅', 'Rp ' + jml.toLocaleString('id-ID') + ' — ' + kat, 'success');
+  toast('Tersimpan!', 'Rp ' + jml.toLocaleString('id-ID') + ' — ' + kat, 'success');
   cekBatas(data);
   renderAll();
 }
@@ -165,14 +165,14 @@ function hapusTrx(id) {
   var data = getData().filter(function (t) { return t.id !== id; });
   saveData(data);
   renderAll();
-  toast('Dihapus 🗑️', 'Transaksi telah dihapus.', 'info');
+  toast('Dihapus', 'Transaksi telah dihapus.', 'info');
 }
 
 function hapusSemua() {
   if (getData().length === 0) { toast('Kosong', 'Tidak ada data untuk dihapus.', 'info'); return; }
   if (confirm('Hapus semua riwayat pengeluaran? Tindakan ini tidak bisa dibatalkan.')) {
     saveData([]); renderAll();
-    toast('Dihapus 🗑️', 'Semua riwayat berhasil dihapus.', 'success');
+    toast('Dihapus', 'Semua riwayat berhasil dihapus.', 'success');
   }
 }
 
@@ -180,7 +180,7 @@ function simpanBatas() {
   var v = parseInt(document.getElementById('i-batas').value);
   if (!v || v <= 0) { toast('Peringatan', 'Masukkan batas yang valid!', 'warn'); return; }
   localStorage.setItem(key('batas'), v);
-  toast('Tersimpan! ✅', 'Batas diset ke Rp ' + v.toLocaleString('id-ID') + '.', 'success');
+  toast('Tersimpan!', 'Batas diset ke Rp ' + v.toLocaleString('id-ID') + '.', 'success');
   renderAll();
 }
 
@@ -361,12 +361,12 @@ function togglePass(id, btn) {
 /* ── TOAST ── */
 function toast(title, msg, type, dur) {
   dur = dur || 3500;
-  var ico = { success:'✅', warn:'⚠️', error:'❌', info:'ℹ️' };
+  var ico = { success:'', warn:'⚠️', error:'❌', info:'' };
   var box = document.getElementById('toast-box');
   var el  = document.createElement('div');
   el.className = 'toast t-'+type;
   el.innerHTML =
-    '<span class="toast-ico">'+(ico[type]||'ℹ️')+'</span>' +
+    '<span class="toast-ico">'+(ico[type]||'')+'</span>' +
     '<div class="toast-body"><div class="toast-title">'+title+'</div><div class="toast-msg">'+msg+'</div></div>' +
     '<button class="toast-x" type="button" onclick="closeToast(this.parentElement)">✕</button>';
   el.addEventListener('click', function(){ closeToast(el); });
